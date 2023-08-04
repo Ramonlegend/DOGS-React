@@ -5,7 +5,7 @@ import Error from '../Components/Helper/Error';
 import { COMMENT_POST } from '../api';
 import styles from './PhotoCommentsForm.module.css';
 
-const PhotoCommentsForm = ({ id, setComments }) => {
+const PhotoCommentsForm = ({ id, setComments, single }) => {
   const [comment, setComment] = React.useState('');
   const { request, error } = useFetch();
 
@@ -20,12 +20,15 @@ const PhotoCommentsForm = ({ id, setComments }) => {
   }
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form
+      className={`${styles.form} ${single ? styles.single : ''}`}
+      onSubmit={handleSubmit}
+    >
       <textarea
         className={styles.textarea}
         id="comment"
         name="comment"
-        placeholder="Comente aqui..."
+        placeholder="Comente..."
         value={comment}
         onChange={({ target }) => setComment(target.value)}
       />
@@ -36,5 +39,4 @@ const PhotoCommentsForm = ({ id, setComments }) => {
     </form>
   );
 };
-
 export default PhotoCommentsForm;
